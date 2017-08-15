@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container columns is-centered">
+            <div class="column is-narrow">
+                <h1 class="title">Login</h1>
+                <p class="subtitle">Please login with your ID and password.</p>
+                <p class="small">NOTE // You should use Google Chrome for this prob</p>
+
+                <form action="/login" class="form" method="POST">
+                    <div class="field">
+                        <label class="label">ID</label>
+                        <div class="control">
+                            <input class="input" type="text" name="id">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input" type="password" name="password">
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped is-grouped-right">
+                        <p class="control">
+                            <input class="button is-primary" value="Login" type="submit">
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+    <script>
+        
+        // NOTE: You (maybe) cannot solve this prob with the method you've done for web-easy.
+        setInterval(function() {
+            window.HTMLElement.prototype.removeEventListener = null;
+            window.clearInterval = null;
+        }, 5);
+
+        document.querySelector('form.form').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            if (document.querySelector('input[name="id"]').value === 'admin') {
+                alert('You cannot login with admin ID.');
+                return false;
+            }
+
+            fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: document.querySelector('input[name="id"]').value,
+                    password: document.querySelector('input[name="password"]').value,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.success) {
+                    Cookies.set('session', data.s);
+                    window.location.href = '/me';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(function(err) {
+                console.log(err);
+                alert('server error...');
+            })
+
+        });
+
+    </script>
+</body>
+
+</html>
