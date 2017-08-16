@@ -1,0 +1,25 @@
+<div id="login" class="container">
+    <form ng-submit="$ctrl.doLogin()" layout-align="center">
+        <md-card>
+            <md-card-title layout-margin>
+                <md-card-title-text>
+                    <span class="md-headline">로그인</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout-margin>
+                <md-input-container class="md-block">
+                    <label>아이디 (이메일)</label>
+                    <input ng-model="$ctrl.loginData.email">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>비밀번호</label>
+                    <input ng-model="$ctrl.loginData.password" type="password">
+                </md-input-container>
+                <div id="message-login" class="alert alert-danger" ng-show="$ctrl.errorMessage">{{ $ctrl.errorMessage }}</div>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" type="submit">로그인</md-button>
+            </md-card-actions>
+        </md-card>
+    </form>
+</div>

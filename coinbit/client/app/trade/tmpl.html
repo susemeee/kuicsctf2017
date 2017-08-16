@@ -1,0 +1,63 @@
+
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Hello xxx!</span>
+            <span class="md-subhead">You have 0 BTC and 0 USD.</span>
+        </md-card-title-text>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button>My Page</md-button>
+            <md-button>Logout</md-button>
+        </md-card-actions>
+    </md-card-title>
+</md-card>
+
+<div layout="row">
+    <div flex="75">
+        <md-card>
+            <md-card-title>
+                <span class="md-headline">{{ $ctrl.priceType }} Price: ${{ $ctrl.currentPrice | currencyFormat }}</span>
+            </md-card-title>
+            <md-card-content>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="BTC" ng-click="$ctrl.priceType = 'BTC'">
+                        <md-content>
+                            <chart price-type="btc"></chart>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="ETH" ng-click="$ctrl.priceType = 'ETH'">
+                        <md-content>
+                            <h1>Coming soon!</h1>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="ETC" ng-click="$ctrl.priceType = 'ETC'">
+                        <md-content>
+                            <h1>Coming soon!</h1>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="XRP" ng-click="$ctrl.priceType = 'XRP'">
+                        <md-content>
+                            <h1>Coming soon!</h1>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div flex="25">
+        <md-card>
+            <md-card-title>
+                <span class="md-headline">Order!</span>
+            </md-card-title>
+            <md-card-content>
+                <md-input-container class="md-block">
+                    <label>Amount to buy</label>
+                    <input type="number" ng-model="$ctrl.buyAmount">
+                </md-input-container>
+                <p>You should pay {{ $ctrl.buyAmount * $ctrl.currentPrice | currencyFormat }} USD.</p>
+                <md-button class="md-primary md-raised" flex>Buy!</md-button>
+            </md-card-content>
+        </md-card>
+
+    </div>
+</div>
